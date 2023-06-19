@@ -85,13 +85,13 @@ var _ = Describe("Task Tracker Plus", Ordered, func() {
 
 	db := db.NewDB()
 	dbCredential := model.Credential{
-		Host:         "localhost",
-		Username:     "postgres",
-		Password:     "reyhan",
-		DatabaseName: "test_db_camp",
-		Port:         5432,
-		Schema:       "public",
-	}
+			Host:         "containers-us-west-151.railway.app",
+			Username:     "postgres",
+			Password:     "rXtqMFCUu1Ukei3lWZ0r",
+			DatabaseName: "railway",
+			Port:         7222,
+			Schema:       "public",
+		}
 
 	conn, err := db.Connect(&dbCredential)
 	Expect(err).ShouldNot(HaveOccurred())

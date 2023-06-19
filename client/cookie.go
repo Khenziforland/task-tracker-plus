@@ -4,6 +4,7 @@ import (
 	"net/http"
 	"net/http/cookiejar"
 	"net/url"
+	"os"
 )
 
 func GetClientWithCookie(token string, cookies ...*http.Cookie) (*http.Client, error) {
@@ -17,10 +18,17 @@ func GetClientWithCookie(token string, cookies ...*http.Cookie) (*http.Client, e
 		Value: token,
 	})
 
-	jar.SetCookies(&url.URL{
-		Scheme: "http",
-		Host:   "localhost:8080",
-	}, cookies)
+	var cookieHost string = os.Getenv("RAILWAY_STATIC_URL")
+    cookieScheme := "https"
+    if cookieHost == "" {
+        cookieHost = "http"
+        cookieHost = "localhost"
+    }
+
+    jar.SetCookies(&url.URL{
+        Scheme: cookieScheme,
+        Host:   cookieHost,
+    }, cookies)
 
 	c := &http.Client{
 		Jar: jar,
